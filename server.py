@@ -5,7 +5,6 @@ from bottle import route, template, static_file, run, request, response
 from models import session, Aluno
 
 def serializer(accept, data, alias='root', element='element'):
-    print('xml' in accept)
     if 'xml' in accept:
         response.content_type = 'application/xml; charset=utf-8'
         return serialize_xml(data, alias=alias, element=element)
@@ -32,7 +31,6 @@ def alunos():
     registros = query.all()
     lista = []
     for item in registros:
-        print(item.columns_to_dict())
         lista.append( item.columns_to_dict() )
     return serializer(accept, lista, alias='alunos', element='aluno')
 
