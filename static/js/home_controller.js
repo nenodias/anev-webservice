@@ -1,7 +1,7 @@
 (function() {
     'use strict';
     angular.module('app')
-    .controller('HomeController', ['$scope', '$http', function($scope, $http) {
+    .controller('HomeController', ['$scope', '$http', 'ngXml2json', function($scope, $http, ngXml2json) {
         $scope.aluno = null;
         $scope.nome =  null;
         var JSON = { id: 1, name: 'JSON' };
@@ -31,6 +31,9 @@
    			.then(function(response){
    				var retorno = response.data;
           $scope.data = retorno;
+          if(format === 'xml'){
+            retorno = ngXml2json.xml_to_object(retorno);
+          }
    				$scope.registros = retorno.alunos;
    				console.log(retorno.alunos)
    			});
