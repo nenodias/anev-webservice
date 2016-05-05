@@ -2,14 +2,26 @@
 <html class="no-js" lang="en">
    <head>
       <meta charset="utf-8"/>
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
       <title>ANEV - Web Service</title>
+      <!-- Foundation Css -->
       <link rel="stylesheet" href="http://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css">
+      <!-- Estilo -->
       <link rel="stylesheet" href="static/css/style.css">
+      <!-- Ícones -->
       <link rel="stylesheet" href="static/css/fonts/foundation-icons.css">
+      <!-- JQuery -->
+      <script src="https://code.jquery.com/jquery-2.2.3.js" integrity="sha256-laXWtGydpwqJ8JA+X9x2miwmaiKhn8tVmOVEigRNtP4=" crossorigin="anonymous"></script>
+      <!-- Angular -->
+      <script type="text/javascript" src="https://code.angularjs.org/1.5.5/angular.js"></script>
+      <!-- App -->
+      <script type="text/javascript" src="static/js/app.js"></script>
+      <script type="text/javascript" src="static/js/app-config.js"></script>
+      <script type="text/javascript" src="static/js/home_controller.js"></script>
    </head>
-   <body>
-      <div class="off-canvas-wrapper">
+   <body ng-app="app">
+      <div class="off-canvas-wrapper" ng-controller="HomeController">
          <div class="off-canvas-wrapper-inner" data-off-canvas-wrapper>
             <!-- off-canvas title bar for 'small' screen -->
             <div class="title-bar" data-responsive-toggle="widemenu" data-hide-for="medium">
@@ -39,19 +51,27 @@
                     <div class="large">
                         <h4 class="text-center">Pesquisar</h4>
                         <label>Aluno
-                        <input type="text" placeholder="Aluno">
+                        <input type="number" ng-model="aluno" placeholder="Aluno">
                         </label>
                         <label>Nome
-                        <input type="text" placeholder="Nome">
+                        <input type="text" ng-model="nome" placeholder="Nome">
                         </label>
+                        <select ng-model="formato" ng-options="item as item.name for item in items"></select>
                         <p>
-                            <a type="submit" class="button expanded">
+                            <a type="submit" class="button expanded" ng-click="pesquisar()">
                                 <i class="fi-magnifying-glass foundicon-magnifying-glass"></i>
                                 Pesquisar
                             </a>
                         </p>
                     </div>
                 </form>
+               </div>
+               <div class="row column">
+                <div class="panel">
+                  <h5>Data.</h5>
+                  <pre id="data">
+                  </pre>
+                </div>
                </div>
                <div class="row column">
                 <table id="tabela">
@@ -65,12 +85,15 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                          <td>010616007</td>
-                          <td>Neno</td>
-                          <td>111.444.77.45</td>
-                          <td>12.123.123-5</td>
-                          <td>17/11/1992</td>
+                        <tr ng-repeat="(indice, dado) in registros">
+                          <td>({dado.aluno})</td>
+                          <td>({dado.nome})</td>
+                          <td>({dado.cpf})</td>
+                          <td>({dado.rg})</td>
+                          <td>({dado.data_nasc})</td>
+                        </tr>
+                        <tr ng-hide="registros.length">
+                          <td col="5">Nenhum Registro encontrado</td>
                         </tr>
                     </tbody>
                 </table>
