@@ -9,6 +9,7 @@
         $scope.items = [ JSON, XML ];
    		$scope.formato = JSON;
    		$scope.registros = [];
+      $scope.data = '';
 
    		$scope.pesquisar = function(){
    			var filtros = '';
@@ -18,9 +19,18 @@
    			if($scope.nome != null){
    				filtros += '&nome=' + $scope.nome;
    			}
-   			$http.get('alunos?format=' + $scope.formato.name + filtros)
+        var format = $scope.formato.name.toLowerCase();
+        
+        console.log(filtros);
+   			$http.get('alunos?format=' + format + filtros,{
+          headers: {
+            'Content-Type': 'application/'+format,
+            'Accept': 'application/'+format
+          }
+        })
    			.then(function(response){
    				var retorno = response.data;
+          $scope.data = retorno;
    				$scope.registros = retorno.alunos;
    				console.log(retorno.alunos)
    			});
