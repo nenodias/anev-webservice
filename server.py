@@ -1,4 +1,5 @@
 import os
+import sys
 import bottle
 import json
 from xml_utils import serialize_xml
@@ -8,6 +9,7 @@ from models import session, Aluno
 import os
 DIRNAME = os.path.abspath(os.path.dirname(__file__))
 bottle.TEMPLATE_PATH.insert(0, DIRNAME)
+sys.path.append (DIRNAME)
 
 def serializer(accept, data, alias='root', element='element'):
     if 'xml' in accept:
