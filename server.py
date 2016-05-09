@@ -5,6 +5,10 @@ from xml_utils import serialize_xml
 from bottle import route, template, static_file, run, request, response
 from models import session, Aluno
 
+import os
+DIRNAME = os.path.abspath(os.path.dirname(__file__))
+bottle.TEMPLATE_PATH.insert(0, DIRNAME)
+
 def serializer(accept, data, alias='root', element='element'):
     if 'xml' in accept:
         response.content_type = 'application/xml; charset=utf-8'
@@ -40,6 +44,6 @@ def static(arquivo):
     return static_file(arquivo, 'static')
 
 if __name__ == '__main__':
-    run(host='localhost', port=8001, debug=True)
+    run(host='0.0.0.0', port=8001, debug=True)
 
 app = bottle.default_app()
