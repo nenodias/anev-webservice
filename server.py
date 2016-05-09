@@ -42,4 +42,7 @@ def static(arquivo):
 if __name__ == '__main__':
     run(host='localhost', port=8001, debug=True)
 
+import os
+DIRNAME = os.path.abspath(os.path.dirname(__file__))
+bottle.TEMPLATE_PATH.insert(0, DIRNAME+os.sep+'template')
 app = bottle.default_app()
