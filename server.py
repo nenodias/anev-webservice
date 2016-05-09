@@ -1,3 +1,4 @@
+import os
 import bottle
 import json
 from xml_utils import serialize_xml
@@ -13,7 +14,7 @@ def serializer(accept, data, alias='root', element='element'):
 
 @route('/',['GET'])
 def index():
-    return template('template/index.html')
+    return template('template'+os.sep+'index.html')
 
 @route('/alunos',['GET'])
 def alunos():
