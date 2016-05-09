@@ -6,11 +6,6 @@ from xml_utils import serialize_xml
 from bottle import route, template, static_file, run, request, response
 from models import session, Aluno
 
-import os
-DIRNAME = os.path.abspath(os.path.dirname(__file__))
-bottle.TEMPLATE_PATH.insert(0, DIRNAME)
-sys.path.append (DIRNAME)
-
 def serializer(accept, data, alias='root', element='element'):
     if 'xml' in accept:
         response.content_type = 'application/xml; charset=utf-8'
