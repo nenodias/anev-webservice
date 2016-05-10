@@ -1,3 +1,5 @@
+import os
+import sys
 import bottle
 import json
 from xml_utils import serialize_xml
@@ -13,7 +15,7 @@ def serializer(accept, data, alias='root', element='element'):
 
 @route('/',['GET'])
 def index():
-    return template('template/index.html')
+    return template('index.html')
 
 @route('/alunos',['GET'])
 def alunos():
@@ -40,3 +42,5 @@ def static(arquivo):
 
 if __name__ == '__main__':
     run(host='0.0.0.0', port=8000, debug=True)
+
+app = bottle.default_app()
