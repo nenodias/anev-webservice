@@ -39,4 +39,4 @@ def static(arquivo):
     return static_file(arquivo, 'static')
 
 if __name__ == '__main__':
-    run(host='localhost', port=8001, debug=True)
+    run(host='0.0.0.0', port=8000, debug=True)

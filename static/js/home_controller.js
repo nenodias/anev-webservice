@@ -52,6 +52,7 @@
    				console.log(retorno.alunos);
    			});
    		};
+      $scope.pesquisar();
     }])
     ;
  })();
