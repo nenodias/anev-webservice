@@ -11,7 +11,7 @@ def serializer(accept, data, alias='root', element='element'):
         response.content_type = 'application/xml; charset=utf-8'
         return serialize_xml(data, alias=alias, element=element)
     response.content_type = 'application/json; charset=utf-8'
-    return json.dumps({alias:data})
+    return json.dumps(data)
 
 @route('/',['GET'])
 def index():

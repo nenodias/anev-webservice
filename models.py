@@ -1,19 +1,12 @@
 # *-* coding: utf-8 *-*
-import hashlib
-from datetime import datetime, date
+from datetime import date
 
-from sqlalchemy import Table, Column, Integer, String, Date, DateTime, Boolean, BigInteger, Numeric, Enum, ForeignKey, UniqueConstraint, Text
-from sqlalchemy.orm import relationship, backref
-from sqlalchemy.ext.hybrid import hybrid_property
+from sqlalchemy import  Column, Integer, String, Date
 from sqlalchemy.ext.declarative import declarative_base
 
 ''' Session '''
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
-from sqlalchemy.pool import StaticPool
-
-''' Meta '''
-from sqlalchemy.schema import MetaData
 
 Base = declarative_base()
 engine = create_engine('sqlite:///banco.sqlite')
@@ -24,11 +17,11 @@ session = Session()
 class Aluno(Base):
     __tablename__ = 'alunos'
 
-    aluno = Column(Integer, primary_key=True)
-    nome = Column(String)
-    cpf = Column(String)
-    rg = Column(String)
-    data_nasc = Column(Date() )
+    aluno = Column('aluno',Integer, primary_key=True)
+    nome = Column('nome',String)
+    cpf = Column('cpf',String)
+    rg = Column('rg',String)
+    data_Nascimento = Column('data_nasc',Date() )
     
     def columns_to_dict(self):
         dict_ = {}
@@ -38,8 +31,6 @@ class Aluno(Base):
                 value = value.strftime('%d/%m/%Y')
             dict_[key] = value
         return dict_
-
-Base.metadata.create_all(engine)
 
 if __name__ == '__main__':
     Base.metadata.create_all(engine)
