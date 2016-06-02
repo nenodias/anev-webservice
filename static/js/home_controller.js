@@ -14,24 +14,19 @@
    		$scope.pesquisar = function(){
    			var filtros = '';
    			if($scope.aluno != null&& $scope.aluno !== ""){
-          filtros += '&code=' + $scope.aluno;
-   				//filtros += '&aluno=' + $scope.aluno;
+   				filtros += '&aluno=' + $scope.aluno;
    			}
    			if($scope.nome != null && $scope.nome !== ""){
-   				filtros += '&name=' + $scope.nome;
-          //filtros += '&nome=' + $scope.nome;
+          filtros += '&nome=' + $scope.nome;
    			}
         var format = $scope.formato.name.toLowerCase();
         
         console.log(filtros);
-        $http.get('http://41c5cc25.ngrok.io/api/Alunos?'+ filtros,{
-   			//$http.get('alunos?format=' + format + filtros,{
-          /*
+   			$http.get('alunos?format=' + format + filtros,{
           headers: {
             'Content-Type': 'application/'+format,
             'Accept': 'application/'+format
           }
-          */
         })
    			.then(function(response){
    				var retorno = response.data;
@@ -48,7 +43,7 @@
               aluno['nome'] = $(this).find('nome').text();
               aluno['cpf'] = $(this).find('cpf').text();
               aluno['rg'] = $(this).find('rg').text();
-              aluno['data_Nascimento'] = $(this).find('data_nasc').text();
+              aluno['data_Nascimento'] = $(this).find('data_Nascimento').text();
               alunos.push(aluno);
             });
             retorno = {"alunos": alunos};
